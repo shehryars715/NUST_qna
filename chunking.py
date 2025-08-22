@@ -17,17 +17,39 @@ def load_pdfs(pdf_paths: List[str]) -> List[str]:
     return all_pages
 
 
-def chunk_with_langchain_nltk(
+def custom_chunk_with_nltk(
     pages: List[str],
     chunk_size: int = 1000,
     chunk_overlap: int = 200,
 ) -> List[str]:
     """
-    Sentence-aware chunking (char-based size + overlap).
+    Custom chunking that ensures strict chunk size and overlap.
     """
-    splitter = NLTKTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     full_text = "\n\n".join(pages)
-    return splitter.split_text(full_text)
+    sentences = nltk.sent_tokenize(full_text)
+    
+    chunks = []
+    current_chunk = []
+    current_chunk_length = 0
+    
+    for sentence in sentences:
+        sentence_length = len(sentence)
+        
+        if current_chunk_length + sentence_length > chunk_size:
+            if current_chunk:  # if current_chunk is not empty, add it
+                chunks.append(" ".join(current_chunk))
+            # Add overlap by including sentences from the previous chunk
+            current_chunk = current_chunk[-chunk_overlap:] + [sentence]
+            current_chunk_length = sum(len(s) for s in current_chunk)
+        else:
+            current_chunk.append(sentence)
+            current_chunk_length += sentence_length
+    
+    if current_chunk:  # add any remaining chunk
+        chunks.append(" ".join(current_chunk))
+    
+    return chunks
+
 
 
 
@@ -41,7 +63,7 @@ if __name__ == "__main__":
     page_texts = load_pdfs(pdf_paths)
 
     # 2) LangChain + NLTK splitter
-    lc_chunks = chunk_with_langchain_nltk(
+    lc_chunks = custom_chunk_with_nltk(
         page_texts,
         chunk_size=1000,
         chunk_overlap=200,
