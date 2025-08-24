@@ -60,7 +60,3 @@ def retrieve_and_answer_query(query):
     result = qa_chain.invoke({"question": query})
     return result["answer"]
 
-while True:
-    query = input("Enter your question: ")
-    response = retrieve_and_answer_query(query)
-    print("Response:", response)

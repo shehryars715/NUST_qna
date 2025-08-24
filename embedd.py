@@ -36,3 +36,5 @@ vectorstore = FAISS.from_texts(texts, embeddings)
 vectorstore.save_local("faiss_index")
 
 print("✅ FAISS index created and saved!")
+
+
