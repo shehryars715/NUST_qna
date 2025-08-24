@@ -33,7 +33,7 @@ memory = ConversationBufferWindowMemory(
 prompt_template = """You are a chatbot for NUST. 
 Use the following retrieved context to answer the question. 
 If the answer is not in the context, say you don't know. If there's a link to web in the context saying "visit:" , provide that too. 
-Explain the answer a little bit but stay on track. Don't make things up.
+Explain the answer a little bit but stay on track. Don't make things up. Do not mention anything like "provided context" answer as if you have direct knowledge.
 
 Chat history:
 {chat_history}
