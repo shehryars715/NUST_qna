@@ -100,9 +100,14 @@ if __name__ == "__main__":
     pdf_text = load_pdfs(pdf_paths)
     pdf_chunks = custom_chunk_with_nltk(pdf_text, chunk_size=2000)
 
+    formatted_chunks = [
+        {"chunk_id": i, "text": chunk}
+        for i, chunk in enumerate(pdf_chunks, start=6)
+    ]
+
     pdf_output = output_dir / "pdf_chunks.json"
     with pdf_output.open("w", encoding="utf-8") as f:
-        json.dump(pdf_chunks, f, ensure_ascii=False, indent=2)
+        json.dump(formatted_chunks, f, ensure_ascii=False, indent=2)
     print(f"[✓] PDF chunks saved to: {pdf_output.resolve()}")
 
     # --- Process JSON ---
