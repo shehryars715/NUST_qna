@@ -98,6 +98,21 @@ NLTK – Tokenization & chunking
 
 Streamlit – Chatbot frontend
 
+
+## Visual Demo
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/70b84beb-ea5d-4abd-8108-69217c8119bf" />
+
+
+
+<img width="1920" height="1080" alt="Screenshot 2025-08-26 013617" src="https://github.com/user-attachments/assets/a537eacc-9eb3-47e1-bc7f-521ff8970a91" />
+
+
+
+<img width="1920" height="1080" alt="Screenshot 2025-08-26 013600" src="https://github.com/user-attachments/assets/7e41c752-7df7-471c-94fd-57be286ca5a8" />
+
+
+
+
 ## Installation and Deployment
 
 ### Environment Configuration
